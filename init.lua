@@ -1,3 +1,12 @@
+function tableContainsKey(table, key)
+  for k, _ in pairs(table) do
+    if k == key then
+      return true
+    end
+  end
+  return false
+end
+
 function getTableDiff(originalTable, keysToRemove)
   local resultTable = {}
   for _, key in ipairs(originalTable) do
@@ -6,15 +15,6 @@ function getTableDiff(originalTable, keysToRemove)
     end
   end
   return resultTable
-end
-
-function tableContainsKey(table, key)
-  for k, _ in pairs(table) do
-    if k == key then
-      return true
-    end
-  end
-  return false
 end
 
 function tableContainsValue(table, val)
@@ -93,8 +93,12 @@ function make_fakedef(name)
 	end
 
 	if TEST_MAKE_FAKEDEF then
-	def.description = 'Fake '..def.description
-	print('new desc: '..def.description)
+		if def.description ~= nil then
+			def.description = 'Fake '..def.description
+		else
+			def.description = 'Fake Item'
+		end
+		print('new desc: '..def.description)
 	end
 	--for a, b in pairs(def) do
 	--	print(a..' : '..b)
@@ -319,7 +323,7 @@ old_register_craft({
 local DEBUG_NEW_REGISTER_CRAFT = true
 function new_register_craft(recipe)
 	assert(recipe ~= nil)
-	if DEBUG_NEW_REGISTER_CRAFT then print('register_craft() recipe: '..recipe_to_string(recipe)) end
+	--if DEBUG_NEW_REGISTER_CRAFT then print('register_craft() recipe: '..recipe_to_string(recipe)) end
 
 	if recipe.output == nil then -- fuel
 		if DEBUG_NEW_REGISTER_CRAFT then print('register_craft() -1 A') end
@@ -348,6 +352,8 @@ function new_register_craft(recipe)
 	--assert(itmname ~= nil)
 	--assert(modname ~= "")
 	--assert(itmname ~= "")
+	if modname == 'homedecor' then return end -- whatever
+	if modname == 'jumpdrive' then return end -- whatever
 	if modname == 'iafakery' then
 		if DEBUG_NEW_REGISTER_CRAFT then print('register_craft() 1 A') end
 		old_register_craft(recipe)

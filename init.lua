@@ -1,3 +1,4 @@
+local MODNAME = minetest.get_current_modname()
 function tableContainsKey(table, key)
   for k, _ in pairs(table) do
     if k == key then
@@ -93,6 +94,7 @@ function make_fakedef(name)
 	end
 
 	if TEST_MAKE_FAKEDEF then
+		--def.name = name
 		if def.description ~= nil then
 			def.description = 'Fake '..def.description
 		else
@@ -218,14 +220,17 @@ function list_nd_to_string(recipe)
 end
 
 local def = table.copy(minetest.registered_items["default:mese_crystal_fragment"])
+--def.name = "iafakery:mese_crystal_fragment"
 if TEST_MAKE_FAKEDEF then def.description = 'Fake '..def.description end
 minetest.register_craftitem("iafakery:mese_crystal_fragment", def)
 
 def = table.copy(minetest.registered_items["default:mese"])
+--def.name = "iafakery:mese"
 if TEST_MAKE_FAKEDEF then def.description = 'Fake '..def.description end
 minetest.register_node("iafakery:mese", def)
 
 def = table.copy(minetest.registered_items["default:diamondblock"])
+--def.name = "iafakery:diamondblock"
 if TEST_MAKE_FAKEDEF then def.description = 'Fake '..def.description end
 minetest.register_node("iafakery:diamondblock", def)
 

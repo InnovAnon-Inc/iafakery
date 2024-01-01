@@ -1,3 +1,7 @@
+--<<<<<<< HEAD
+--=======
+local MODNAME = minetest.get_current_modname()
+-->>>>>>> 47c9b37aa20cf58a37f9c91dffaedbd68dbf8528
 function tableContainsKey(table, key)
   for k, _ in pairs(table) do
     if k == key then
@@ -93,6 +97,10 @@ function make_fakedef(name)
 	end
 
 	if TEST_MAKE_FAKEDEF then
+--<<<<<<< HEAD
+--=======
+		--def.name = name
+-->>>>>>> 47c9b37aa20cf58a37f9c91dffaedbd68dbf8528
 		if def.description ~= nil then
 			def.description = 'Fake '..def.description
 		else
@@ -218,14 +226,17 @@ function list_nd_to_string(recipe)
 end
 
 local def = table.copy(minetest.registered_items["default:mese_crystal_fragment"])
+--def.name = "iafakery:mese_crystal_fragment"
 if TEST_MAKE_FAKEDEF then def.description = 'Fake '..def.description end
 minetest.register_craftitem("iafakery:mese_crystal_fragment", def)
 
 def = table.copy(minetest.registered_items["default:mese"])
+--def.name = "iafakery:mese"
 if TEST_MAKE_FAKEDEF then def.description = 'Fake '..def.description end
 minetest.register_node("iafakery:mese", def)
 
 def = table.copy(minetest.registered_items["default:diamondblock"])
+--def.name = "iafakery:diamondblock"
 if TEST_MAKE_FAKEDEF then def.description = 'Fake '..def.description end
 minetest.register_node("iafakery:diamondblock", def)
 
@@ -353,6 +364,10 @@ function new_register_craft(recipe)
 	--assert(modname ~= "")
 	--assert(itmname ~= "")
 	if modname == 'homedecor' then return end -- whatever
+--<<<<<<< HEAD
+--=======
+	if modname == 'jumpdrive' then return end -- whatever
+-->>>>>>> 47c9b37aa20cf58a37f9c91dffaedbd68dbf8528
 	if modname == 'iafakery' then
 		if DEBUG_NEW_REGISTER_CRAFT then print('register_craft() 1 A') end
 		old_register_craft(recipe)
